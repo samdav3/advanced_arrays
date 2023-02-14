@@ -24,17 +24,41 @@ fun main(args: Array<String>) {
             var aqty = combArray[1][i].toInt()
             if (q1 == 0) {
                 var count = 0
-                var new = print("What would you like the new quantity for $aitem to be?: ").toString()
-                new = readLine()!!
-                aqty = combArray[1][i].toInt()
-                var newval = new
-                //var dif =
-                println("The old quantity for $aitem was $aqty and the new quantity is $newval.") // The difference between quantities is $dif.
-                var more = println("Would you like to update another item in your inventory? (y/n): ").toString()
-                more = readLine()!!
-                if (more == "y") {
+                var add = 'a'
+                var remove = 'r'
+                var method = print("Would you like to add or remove from your inventory for $aitem? (a/r): ")
+                if (method.equals(add)) {
+                    var new = print("How many would you like to add to the quantity of $aitem?: ").toString()
+                    new = readLine()!!
+                    aqty = combArray[1][i].toInt()
+                    var newval = aqty + new.toInt()
+                    println("The old quantity for $aitem was $aqty and the new quantity is $newval.") // The difference between quantities is $dif.
+                    var more = println("Would you like to update another item in your inventory? (y/n): ").toString()
+                    more = readLine()!!
+                    if (more == "y") {
+                        update()
+                    }
+                }else if (method.equals(remove)){
+                    var new = print("How many would you like to remove from the quantity of $aitem?: ").toString()
+                    new = readLine()!!
+                    aqty = combArray[1][i].toInt()
+                    var newval = aqty - new.toInt()
+                    if (newval < 0){
+                        println("If you remove $new from teh quantity of $aitem, your inventory will be negative. Please try a different number.")
+                        update()
+                    }else{
+                        println("The old quantity for $aitem was $aqty and the new quantity is $newval.") // The difference between quantities is $dif.
+                        var more = println("Would you like to update another item in your inventory? (y/n): ").toString()
+                        more = readLine()!!
+                        if (more == "y") {
+                            update()
+                        }
+                    }
+                }else{
+                    println("Please enter a valid entry (a/r).")
                     update()
                 }
+
             }
         }
     }
